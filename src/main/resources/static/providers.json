@@ -1,0 +1,7 @@
+{
+  "providers": [
+    { "name": "provider_a", "topics": "math+science" },
+    { "name": "provider_b", "topics": "reading+science" },
+    { "name": "provider_c", "topics": "history+math" }
+  ]
+}

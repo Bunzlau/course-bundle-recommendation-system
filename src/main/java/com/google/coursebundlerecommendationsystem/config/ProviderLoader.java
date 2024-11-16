@@ -1,6 +1,5 @@
 package com.google.coursebundlerecommendationsystem.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.coursebundlerecommendationsystem.model.Provider;
 import com.google.coursebundlerecommendationsystem.model.Topic;
@@ -10,27 +9,25 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
-@Configuration
-public class ProviderConfig {
+@Component
+public class ProviderLoader {
     final static String PROVIDER_LOCATION = "classpath:providers.json";
-    ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final String SPLIT_THE_TOPICS_BY_PLUS = "\\+";
 
-    @Bean
     public List<Provider> providers() {
         try {
             File file = ResourceUtils.getFile(PROVIDER_LOCATION);
 
-            ObjectMapper mapper = new ObjectMapper();
             ProvidersWrapper wrapper = mapper.readValue(file, ProvidersWrapper.class);
 
             return wrapper.getProviders().stream()
                     .map(raw -> new Provider(
                             raw.getName(),
-                            Set.of(raw.getTopics().split("\\+")).stream()
+                            Set.of(raw.getTopics().split(SPLIT_THE_TOPICS_BY_PLUS)).stream()
                                     .map(Topic::fromString)
                                     .collect(Collectors.toSet())))
                     .toList();
@@ -41,7 +38,9 @@ public class ProviderConfig {
             throw new RuntimeException(e);
         }
     }
+
     private static class ProvidersWrapper {
+
         private List<ProviderMapper> providers;
 
         public List<ProviderMapper> getProviders() {

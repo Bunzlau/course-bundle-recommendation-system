@@ -32,7 +32,6 @@ How to Run
    Endpoint: POST /api/quotes
    Example Request:
    json
-   
    {
    "topics": {
    "math": 70,
@@ -40,7 +39,6 @@ How to Run
    "history": 30
    }
    }
-   
    Using cURL:
    bash
    curl -X POST -H "Content-Type: application/json" -d '{

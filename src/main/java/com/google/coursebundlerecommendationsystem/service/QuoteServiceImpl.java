@@ -37,7 +37,7 @@ public class QuoteServiceImpl implements QuoteService {
 
     private Optional<QuoteResponseDto> calculateQuoteForProvider(Provider provider,
             Map<Topic, Integer> topTopics) {
-        long matchingTopics = provider.getTopics().stream()
+        long matchingTopics = provider.topics().stream()
                 .filter(topTopics::containsKey)
                 .count();
 

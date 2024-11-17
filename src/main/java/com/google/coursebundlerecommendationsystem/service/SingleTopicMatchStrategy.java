@@ -19,10 +19,10 @@ public class SingleTopicMatchStrategy implements QuoteCalculationStrategy {
                 .toList();
 
         for (int i = 0; i < sortedTopics.size(); i++) {
-            if (provider.getTopics().contains(sortedTopics.get(i).getKey())) {
+            if (provider.topics().contains(sortedTopics.get(i).getKey())) {
                 PricingRate priorityRate = PricingRate.fromPriority(i);
                 return Optional.of(new QuoteResponseDto(
-                        provider.getProvider(),
+                        provider.provider(),
                         sortedTopics.get(i).getValue() * priorityRate.getRate()
                 ));
             }

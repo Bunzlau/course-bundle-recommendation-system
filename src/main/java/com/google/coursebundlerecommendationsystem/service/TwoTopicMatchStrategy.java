@@ -14,12 +14,12 @@ public class TwoTopicMatchStrategy implements QuoteCalculationStrategy {
     @Override
     public Optional<QuoteResponseDto> calculateQuote(Provider provider,
             Map<Topic, Integer> topTopics) {
-        double totalQuote = provider.getTopics().stream()
+        double totalQuote = provider.topics().stream()
                 .filter(topTopics::containsKey)
                 .mapToDouble(topTopics::get)
                 .sum();
 
-        return Optional.of(new QuoteResponseDto(provider.getProvider(),
+        return Optional.of(new QuoteResponseDto(provider.provider(),
                 totalQuote * PricingRate.TWO_TOPICS.getRate()));
     }
 

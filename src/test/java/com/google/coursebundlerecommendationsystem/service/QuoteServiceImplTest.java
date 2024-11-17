@@ -39,11 +39,11 @@ class QuoteServiceImplTest {
 
         assertEquals(3, quotes.size());
         assertTrue(quotes.stream()
-                .anyMatch(q -> q.getProviderName().equals("provider_a") && q.getQuote() == 8.0));
+                .anyMatch(q -> q.providerName().equals("provider_a") && q.quote() == 8.0));
         assertTrue(quotes.stream()
-                .anyMatch(q -> q.getProviderName().equals("provider_b") && q.getQuote() == 5.0));
+                .anyMatch(q -> q.providerName().equals("provider_b") && q.quote() == 5.0));
         assertTrue(quotes.stream()
-                .anyMatch(q -> q.getProviderName().equals("provider_c") && q.getQuote() == 10.0));
+                .anyMatch(q -> q.providerName().equals("provider_c") && q.quote() == 10.0));
     }
 
     @Test

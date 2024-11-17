@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.coursebundlerecommendationsystem.model.Provider;
 import com.google.coursebundlerecommendationsystem.model.Topic;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.DefaultResourceLoader;
 
@@ -26,8 +25,8 @@ public class ProviderConfigTest {
         assertEquals(3, providers.size(), "Providers list should contain 3 items");
 
         Provider providerA = providers.getFirst();
-        assertEquals("provider_a", providerA.getProvider());
-        assertTrue(providerA.getTopics().contains(Topic.MATH));
-        assertTrue(providerA.getTopics().contains(Topic.SCIENCE));
+        assertEquals("provider_a", providerA.provider());
+        assertTrue(providerA.topics().contains(Topic.MATH));
+        assertTrue(providerA.topics().contains(Topic.SCIENCE));
     }
 }

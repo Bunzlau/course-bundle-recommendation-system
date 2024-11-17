@@ -17,7 +17,7 @@ How to Run
 
 1. Clone the Repository
    bash
-   git clone https://github.com/your-repo/quote-recommendation-system.git
+   git clone git@github.com:Bunzlau/course-bundle-recommendation-system.git
 
    
 2. Build the Project

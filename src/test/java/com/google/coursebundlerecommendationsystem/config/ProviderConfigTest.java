@@ -4,28 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.coursebundlerecommendationsystem.model.Provider;
 import com.google.coursebundlerecommendationsystem.model.Topic;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.io.DefaultResourceLoader;
 
 public class ProviderConfigTest {
 
-    ProviderLoader providerLoader;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
+    private final ProviderLoader providerLoader = new ProviderLoader(objectMapper, resourceLoader);
 
-    @BeforeEach
-    void setup() {
-         providerLoader = new ProviderLoader();
-    }
 
     @Test
     public void should_LoadProvidersFromTheFileAndTranslateItToProvider() {
-        // Act
-        List<Provider> providers = providerLoader.providers();
+        List<Provider> providers = providerLoader.getProviders();
 
-        // Assert
-        assertNotNull(providers, "Providers list should not be null");
         assertEquals(3, providers.size(), "Providers list should contain 3 items");
 
         Provider providerA = providers.getFirst();
